@@ -15,6 +15,6 @@ public class UserService implements UserPort {
     private UserRepository userRepository;
 
     public User getById(Long id) {
-        return null;
+        return userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, "user"));
     }
 }
