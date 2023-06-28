@@ -1,4 +1,4 @@
-package com.project.TimeRegistry;
+package com.project.timeRegistry;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
