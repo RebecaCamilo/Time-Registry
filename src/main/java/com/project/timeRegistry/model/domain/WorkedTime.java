@@ -1,9 +1,10 @@
-package com.project.timeRegistry.model;
+package com.project.timeRegistry.model.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "WORKED_TIMES")
 public class WorkedTime {
@@ -28,7 +30,7 @@ public class WorkedTime {
     @NotNull
     private LocalDateTime finish;
 
-    private Duration duration = Duration.between(start, finish);
+    private Duration duration;
 
     private String activityDescription;
 
