@@ -32,6 +32,9 @@ public class User {
     @NotNull
     private String password;
 
+    @NotNull
+    private UserStatus status;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "USER_ID")
     private List<MonthlyReport> monthlyReports;
