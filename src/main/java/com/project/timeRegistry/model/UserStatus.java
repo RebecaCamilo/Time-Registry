@@ -1,4 +1,4 @@
-package com.project.timeRegistry.model.domain;
+package com.project.timeRegistry.model;
 
 public enum UserStatus {
 
