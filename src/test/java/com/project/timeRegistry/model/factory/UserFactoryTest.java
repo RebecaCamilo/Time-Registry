@@ -1,4 +1,4 @@
-package com.project.timeRegistry.factory;
+package com.project.timeRegistry.model.factory;
 
 import com.project.timeRegistry.model.domain.User;
 import com.project.timeRegistry.model.domain.WorkedTime;
