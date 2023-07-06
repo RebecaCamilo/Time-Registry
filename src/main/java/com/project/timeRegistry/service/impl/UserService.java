@@ -1,5 +1,6 @@
 package com.project.timeRegistry.service.impl;
 
+
 import com.project.timeRegistry.model.domain.User;
 import com.project.timeRegistry.model.request.UserRequest;
 import com.project.timeRegistry.repository.UserRepository;
@@ -18,7 +19,7 @@ public class UserService implements UserPort {
 
     @Override
     public Page<User> getAll(Pageable pageable) {
-        return null;
+        return userRepository.findAll(pageable);
     }
 
     public User getById(Long id) {
@@ -45,3 +46,4 @@ public class UserService implements UserPort {
         return null;
     }
 }
+
