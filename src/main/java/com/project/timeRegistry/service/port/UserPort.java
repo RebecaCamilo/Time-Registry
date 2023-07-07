@@ -37,18 +37,18 @@ public interface UserPort {
 
     /**
      * Registry a new User from a UserRequest
-     * @param userRequest    The data to registry a User.
+     * @param user    The User data.
      * @return {@link User}
      */
-    User create(UserRequest userRequest);
+    User create(User user);
 
     /**
      * Update a User registry by its identifier and a UserRequest
      * @param id            Identifier of User.
-     * @param userRequest   The data to update a User.
+     * @param user          The User data.
      * @return {@link User}
      */
-    User update(Long id, UserRequest userRequest);
+    User update(Long id, User user);
 
     /**
      * Set the of User to inactivate by its identifier

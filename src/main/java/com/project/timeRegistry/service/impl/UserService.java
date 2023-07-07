@@ -27,12 +27,12 @@ public class UserService implements UserPort {
     }
 
     @Override
-    public User create(UserRequest userRequest) {
+    public User create(User user) {
         return null;
     }
 
     @Override
-    public User update(Long id, UserRequest userRequest) {
+    public User update(Long id, User user) {
         return null;
     }
 
