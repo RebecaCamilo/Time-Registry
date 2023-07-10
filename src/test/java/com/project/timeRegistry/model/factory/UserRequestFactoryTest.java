@@ -11,4 +11,11 @@ public class UserRequestFactoryTest {
                 .password("pass")
                 .build();
     }
+
+    public static UserRequest createInvalidUserRequest() {
+        return UserRequest.builder()
+                .login("login")
+                .password("pass")
+                .build();
+    }
 }

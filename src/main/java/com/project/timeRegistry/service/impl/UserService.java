@@ -17,11 +17,6 @@ public class UserService implements UserPort {
 
     private UserRepository userRepository;
 
-    @Override
-    public Page<User> getAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
-    }
-
     public User getById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, "user"));
     }
