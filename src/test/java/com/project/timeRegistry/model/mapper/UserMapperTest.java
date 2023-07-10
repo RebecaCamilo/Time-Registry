@@ -48,6 +48,7 @@ class UserMapperTest {
         assertThat(result.getName()).isEqualTo(user.getName());
         assertThat(result.getLogin()).isEqualTo(user.getLogin());
         assertThat(result.getPassword()).isEqualTo(user.getPassword());
+        assertThat(result.getStatus()).isEqualTo(user.getStatus().getDescription());
     }
 
     @Test

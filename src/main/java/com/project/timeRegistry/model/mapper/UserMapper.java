@@ -14,5 +14,6 @@ public interface UserMapper {
 
     User userRequestToUser(UserRequest userRequest);
 
+    @Mapping(source = "status.description", target = "status")
     UserResponse userToUserResponse(User user);
 }

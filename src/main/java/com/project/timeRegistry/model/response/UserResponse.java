@@ -1,6 +1,5 @@
 package com.project.timeRegistry.model.response;
 
-import com.project.timeRegistry.model.domain.UserStatus;
 import lombok.*;
 
 @Getter
@@ -18,6 +17,6 @@ public class UserResponse {
 
     private String password;
 
-    private UserStatus status;
+    private String status;
 
 }
