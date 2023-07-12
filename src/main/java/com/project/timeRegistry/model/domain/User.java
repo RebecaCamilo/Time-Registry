@@ -3,6 +3,7 @@ package com.project.timeRegistry.model.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,10 +20,15 @@ public class User {
 
     private String name;
 
+    @Column(unique=true)
     private String login;
 
     private String password;
 
     private UserStatus status;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "USER_ID")
+    private List<DailyReport> dailyReports;
 
 }
