@@ -2,10 +2,6 @@ package com.project.timeRegistry.service.port;
 
 
 import com.project.timeRegistry.model.domain.User;
-import com.project.timeRegistry.model.request.UserRequest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>
