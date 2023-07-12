@@ -1,6 +1,5 @@
 package com.project.timeRegistry.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.timeRegistry.model.domain.User;
 import com.project.timeRegistry.model.mapper.UserMapper;
@@ -138,7 +137,7 @@ class UserControllerTest {
     }
 
     @Test
-    void shouldReturn400whenUpdateWithIvalidUserRequest() throws Exception {
+    void shouldReturn400whenUpdateWithInvalidUserRequest() throws Exception {
         //given
         var userRequest = createInvalidUserRequest();
 
