@@ -1,12 +1,15 @@
-
 spring:
   datasource:
-    url: jdbc:h2:mem:banco
+    url: jdbc:h2:mem:mydb
     username: sa
     password:
     driver-class-name: org.h2.Driver
   jpa:
-    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     hibernate:
-      ddl-auto: update #create-drop
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      path: /h2
