@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @OpenAPIDefinition(
-		info = @Info(title = "Time register API", version = "1.0.0", description = "Api to manage worked time"),
+		info = @Info(title = "Time Register API", version = "1.0.0", description = "Api to manage worked time"),
 		servers = @Server(url = "http://localhost:8080")
 )
 public class TimeRegistryApplication {

@@ -9,6 +9,8 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import static com.project.timeRegistry.model.domain.UserStatus.ACTIVE;
 import static com.project.timeRegistry.model.domain.UserStatus.INACTIVE;
 
@@ -25,14 +27,16 @@ public class UserService implements UserPort {
     @Override
     public User create(User user) {
         checkIfAlreadyExistsByLogin(user.getLogin());
+        user.setStatus(ACTIVE);
+
         return userRepository.save(user);
     }
 
     @Override
     public User update(Long id, User user) {
         getById(id);
-        //TODO check if login does not appear more than once, and dont belong another user
-        checkIfAlreadyExistsByLogin(user.getLogin()); // <- does not work !
+        checkIfAlreadyExistsByLogin(id, user.getLogin());
+
         return userRepository.save(user);
     }
 
@@ -40,6 +44,7 @@ public class UserService implements UserPort {
     public User deactivate(Long id) {
         User user = getById(id);
         user.setStatus(INACTIVE);
+
         return userRepository.save(user);
     }
 
@@ -47,6 +52,7 @@ public class UserService implements UserPort {
     public User activate(Long id) {
         User user = getById(id);
         user.setStatus(ACTIVE);
+
         return userRepository.save(user);
     }
 
@@ -54,6 +60,18 @@ public class UserService implements UserPort {
         if (userRepository.countByLogin(login) != 0) {
             throw new DataIntegrityViolationException(login);
         }
+    }
+
+    private void checkIfAlreadyExistsByLogin(Long id, String login) {
+        Optional<User> user = getUserBylogin(login);
+
+        if (user.isPresent() &&  !user.get().getId().equals(id)) {
+            throw new DataIntegrityViolationException(login);
+        }
+    }
+
+    private Optional<User> getUserBylogin(String login) {
+        return userRepository.getByLogin(login);
     }
 }
 
