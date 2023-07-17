@@ -1,13 +1,8 @@
 package com.project.timeRegistry.model.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -23,17 +18,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private String name;
+    private String nickname;
 
-    @NotNull
+    @Column(unique=true)
     private String login;
 
-    @NotNull
     private String password;
+
+    private UserStatus status;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "USER_ID")
-    private List<MonthlyReport> monthlyReports;
+    private List<DailyReport> dailyReports;
 
 }

@@ -1,13 +1,8 @@
 package com.project.timeRegistry.model.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,17 +20,15 @@ public class DailyReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private Integer day;
+    private LocalDate day_report;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "MONTHLY_REPORT_ID")
+    @JoinColumn(name = "DAILY_REPORT_ID")
     private List<WorkedTime> workedTimes;
 
     public DailyReport(Long id) {
         this.id = id;
-        LocalDate reportDate = LocalDate.now();
-        this.day = reportDate.getDayOfMonth();
+        this.day_report = LocalDate.now();
     }
 
     public Duration getDailyWorkedHours() {
