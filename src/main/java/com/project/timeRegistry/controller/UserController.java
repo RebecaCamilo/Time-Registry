@@ -91,7 +91,7 @@ public class UserController {
         return ResponseEntity.created(uri).body(userResponse);
     }
 
-    @PutMapping(name = ID, consumes = APPLICATION_JSON_VALUE)
+    @PutMapping(value = ID, consumes = APPLICATION_JSON_VALUE)
     @Operation(summary = "Update a user by its identifier and a UserRequest", method = "PUT")
     @ApiResponses(value = {
             @ApiResponse(

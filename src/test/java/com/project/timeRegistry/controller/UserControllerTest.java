@@ -53,10 +53,10 @@ class UserControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.id").value(user.getId()))
-                .andExpect(jsonPath("$.name").value(user.getName()))
-                .andExpect(jsonPath("$.login").value(user.getLogin()))
-                .andExpect(jsonPath("$.password").value(user.getPassword()));
+                .andExpect(jsonPath("$.id").value(userResponse.getId()))
+                .andExpect(jsonPath("$.name").value(userResponse.getName()))
+                .andExpect(jsonPath("$.login").value(userResponse.getLogin()))
+                .andExpect(jsonPath("$.password").value(userResponse.getPassword()));
 
         verify(this.userService, times(1)).getById(ID);
     }
@@ -82,6 +82,7 @@ class UserControllerTest {
 
         //when
         when(userService.create(any(User.class))).thenReturn(user);
+        final var userResponse = this.userMapper.userToUserResponse(user);
 
         //then
         this.mockMvc.perform(post(PATH_USER)
@@ -91,10 +92,10 @@ class UserControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(redirectedUrlPattern("**/" + PATH_USER + "/" + user.getId()))
                 .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.id").value(user.getId()))
-                .andExpect(jsonPath("$.name").value(user.getName()))
-                .andExpect(jsonPath("$.login").value(user.getLogin()))
-                .andExpect(jsonPath("$.password").value(user.getPassword()));
+                .andExpect(jsonPath("$.id").value(userResponse.getId()))
+                .andExpect(jsonPath("$.name").value(userResponse.getName()))
+                .andExpect(jsonPath("$.login").value(userResponse.getLogin()))
+                .andExpect(jsonPath("$.password").value(userResponse.getPassword()));
 
         verify(this.userService, times(1)).create(any(User.class));
     }
@@ -120,6 +121,7 @@ class UserControllerTest {
 
         //when
         when(userService.update(eq(ID), any(User.class))).thenReturn(user);
+        final var userResponse = this.userMapper.userToUserResponse(user);
 
         //then
         this.mockMvc.perform(put(PATH_USER + "/" + user.getId().toString())
@@ -128,10 +130,10 @@ class UserControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.id").value(user.getId()))
-                .andExpect(jsonPath("$.name").value(user.getName()))
-                .andExpect(jsonPath("$.login").value(user.getLogin()))
-                .andExpect(jsonPath("$.password").value(user.getPassword()));
+                .andExpect(jsonPath("$.id").value(userResponse.getId()))
+                .andExpect(jsonPath("$.name").value(userResponse.getName()))
+                .andExpect(jsonPath("$.login").value(userResponse.getLogin()))
+                .andExpect(jsonPath("$.password").value(userResponse.getPassword()));
 
         verify(this.userService, times(1)).update(eq(ID), any(User.class));
     }
@@ -174,17 +176,18 @@ class UserControllerTest {
 
         //when
         when(userService.deactivate(user.getId())).thenReturn(user);
+        final var userResponse = this.userMapper.userToUserResponse(user);
 
         //then
         this.mockMvc.perform(delete(PATH_USER + "/" + user.getId().toString() + STATUS))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.id").value(user.getId()))
-                .andExpect(jsonPath("$.name").value(user.getName()))
-                .andExpect(jsonPath("$.login").value(user.getLogin()))
-                .andExpect(jsonPath("$.password").value(user.getPassword()))
-                .andExpect(jsonPath("$.status").value(user.getStatus().getDescription()));
+                .andExpect(jsonPath("$.id").value(userResponse.getId()))
+                .andExpect(jsonPath("$.name").value(userResponse.getName()))
+                .andExpect(jsonPath("$.login").value(userResponse.getLogin()))
+                .andExpect(jsonPath("$.password").value(userResponse.getPassword()))
+                .andExpect(jsonPath("$.status").value(userResponse.getStatus()));
 
         verify(this.userService, times(1)).deactivate(user.getId());
     }
@@ -209,17 +212,18 @@ class UserControllerTest {
 
         //when
         when(userService.activate(user.getId())).thenReturn(user);
+        final var userResponse = this.userMapper.userToUserResponse(user);
 
         //then
         this.mockMvc.perform(post(PATH_USER + "/" + user.getId().toString() + STATUS))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.id").value(user.getId()))
-                .andExpect(jsonPath("$.name").value(user.getName()))
-                .andExpect(jsonPath("$.login").value(user.getLogin()))
-                .andExpect(jsonPath("$.password").value(user.getPassword()))
-                .andExpect(jsonPath("$.status").value(user.getStatus().getDescription()));
+                .andExpect(jsonPath("$.id").value(userResponse.getId()))
+                .andExpect(jsonPath("$.name").value(userResponse.getName()))
+                .andExpect(jsonPath("$.login").value(userResponse.getLogin()))
+                .andExpect(jsonPath("$.password").value(userResponse.getPassword()))
+                .andExpect(jsonPath("$.status").value(userResponse.getStatus()));
 
         verify(this.userService, times(1)).activate(user.getId());
     }
@@ -230,7 +234,7 @@ class UserControllerTest {
         when(userService.activate(ID)).thenThrow(ObjectNotFoundException.class);
 
         //then
-        this.mockMvc.perform(delete(PATH_USER + "/" + ID + STATUS))
+        this.mockMvc.perform(post(PATH_USER + "/" + ID + STATUS))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isNotFound());
 
