@@ -34,10 +34,12 @@ public class UserService implements UserPort {
 
     @Override
     public User update(Long id, User user) {
-        getById(id);
+        User userFound = getById(id);
         checkIfAlreadyExistsByLogin(id, user.getLogin());
 
-        return userRepository.save(user);
+        User updatedUser = updateUser(userFound, user);
+
+        return userRepository.save(updatedUser);
     }
 
     @Override
@@ -72,6 +74,13 @@ public class UserService implements UserPort {
 
     private Optional<User> getUserBylogin(String login) {
         return userRepository.getByLogin(login);
+    }
+
+    private User updateUser(User userFound, User user) {
+        userFound.setNickname(user.getNickname());
+        userFound.setLogin(user.getLogin());
+        userFound.setPassword(user.getPassword());
+        return userFound;
     }
 }
 
