@@ -9,7 +9,7 @@ public class UserFactoryTest {
     public static User createValidUser() {
         return User.builder()
                 .id(1L)
-                .name("name")
+                .nickname("name")
                 .login("login")
                 .password("pass")
                 .status(ACTIVE)

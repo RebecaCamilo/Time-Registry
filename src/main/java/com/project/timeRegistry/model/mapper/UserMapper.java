@@ -12,8 +12,10 @@ public interface UserMapper {
 
     UserMapper USER_MAPPER = Mappers.getMapper(UserMapper.class);
 
+    @Mapping(source = "name", target = "nickname")
     User userRequestToUser(UserRequest userRequest);
 
     @Mapping(source = "status.description", target = "status")
+    @Mapping(source = "nickname", target = "name")
     UserResponse userToUserResponse(User user);
 }

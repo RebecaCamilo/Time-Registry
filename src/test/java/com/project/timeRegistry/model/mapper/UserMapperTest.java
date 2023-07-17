@@ -21,7 +21,7 @@ class UserMapperTest {
 
         //then
         assertThat(result).isNotNull();
-        assertThat(result.getName()).isEqualTo(userRequest.getName());
+        assertThat(result.getNickname()).isEqualTo(userRequest.getName());
         assertThat(result.getLogin()).isEqualTo(userRequest.getLogin());
         assertThat(result.getPassword()).isEqualTo(userRequest.getPassword());
     }
@@ -45,7 +45,7 @@ class UserMapperTest {
 
         //then
         assertThat(result).isNotNull();
-        assertThat(result.getName()).isEqualTo(user.getName());
+        assertThat(result.getName()).isEqualTo(user.getNickname());
         assertThat(result.getLogin()).isEqualTo(user.getLogin());
         assertThat(result.getPassword()).isEqualTo(user.getPassword());
         assertThat(result.getStatus()).isEqualTo(user.getStatus().getDescription());
