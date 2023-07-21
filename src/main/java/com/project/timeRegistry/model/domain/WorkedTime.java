@@ -27,4 +27,15 @@ public class WorkedTime {
 
     private String activityDescription;
 
+    public WorkedTime(LocalDateTime start, LocalDateTime finish, String activityDescription) {
+        this.start = start;
+        this.finish = finish;
+        this.duration = Duration.between(start, finish);
+        this.activityDescription = activityDescription;
+    }
+
+    public Duration calcDuration(LocalDateTime start, LocalDateTime finish) {
+        return this.duration = Duration.between(start, finish);
+    }
+
 }

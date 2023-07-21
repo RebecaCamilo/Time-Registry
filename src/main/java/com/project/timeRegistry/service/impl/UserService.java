@@ -21,7 +21,7 @@ public class UserService implements UserPort {
     private UserRepository userRepository;
 
     public User getById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, "user"));
+        return userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, "user id"));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class UserService implements UserPort {
 
     private void checkIfAlreadyExistsByLogin(String login) {
         if (userRepository.countByLogin(login) != 0) {
-            throw new DataIntegrityViolationException(login);
+            throw new DataIntegrityViolationException("Login already exists");
         }
     }
 
@@ -68,7 +68,7 @@ public class UserService implements UserPort {
         Optional<User> user = getUserBylogin(login);
 
         if (user.isPresent() &&  !user.get().getId().equals(id)) {
-            throw new DataIntegrityViolationException(login);
+            throw new DataIntegrityViolationException("Login already exists");
         }
     }
 
